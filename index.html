@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Begin Read - Modern Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>The Begin Read</h1>
+            </div>
+            <div id="searchBar">
+                <input type="text" id="searchInput" placeholder="Search posts..." autocomplete="off">
+                <button id="searchButton"><i class="fas fa-search"></i></button>
+                <ul id="searchSuggestions"></ul>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to The Begin Read</h1>
+            <p class="hero-subtitle">Discover stories, insights, and inspiration in every post</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" id="totalPosts">0</span>
+                    <span class="stat-label">Posts</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="totalViews">1,234</span>
+                    <span class="stat-label">Views</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="totalReaders">567</span>
+                    <span class="stat-label">Readers</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Section -->
+    <main class="main-content">
+        <div class="container">
+            <div class="posts-header">
+                <h2>Latest Posts</h2>
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="tech">Tech</button>
+                    <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
+                    <button class="filter-btn" data-filter="travel">Travel</button>
+                </div>
+            </div>
+            
+            <div class="posts-grid" id="postsGrid">
+                <!-- Posts will be dynamically loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h2>Admin Panel</h2>
+            <div class="admin-header-actions">
+                <button class="logout-btn" id="logoutBtn" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+                <button class="close-admin">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="admin-content">
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="posts">Manage Posts</button>
+                <button class="admin-tab" data-tab="new">New Post</button>
+                <button class="admin-tab" data-tab="settings">Settings</button>
+                <button class="admin-tab" data-tab="advanced">Advanced</button>
+            </div>
+            
+            <!-- Manage Posts Tab -->
+            <div class="admin-tab-content active" id="postsTab">
+                <div class="posts-list" id="adminPostsList">
+                    <!-- Admin posts list will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- New Post Tab -->
+            <div class="admin-tab-content" id="newTab">
+                <form class="new-post-form" id="newPostForm">
+                    <div class="form-group">
+                        <label for="postTitle">Title</label>
+                        <input type="text" id="postTitle" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="postCategory">Category</label>
+                        <select id="postCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="tech">Tech</option>
+                            <option value="lifestyle">Lifestyle</option>
+                            <option value="travel">Travel</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="postImage">Featured Image URL</label>
+                        <input type="url" id="postImage" placeholder="https://example.com/image.jpg">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="postExcerpt">Excerpt</label>
+                        <textarea id="postExcerpt" rows="3" placeholder="Brief description of the post..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="postContent">Content</label>
+                        <textarea id="postContent" rows="10" placeholder="Write your post content here..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Publish Post</button>
+                        <button type="button" class="btn-secondary" id="clearFormBtn">Clear</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Settings Tab -->
+            <div class="admin-tab-content" id="settingsTab">
+                <div class="settings-section">
+                    <h3>Blog Settings</h3>
+                    <form class="settings-form" id="settingsForm">
+                        <div class="form-group">
+                            <label for="blogTitle">Blog Title</label>
+                            <input type="text" id="blogTitle" value="The Begin Read">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="blogDescription">Blog Description</label>
+                            <textarea id="blogDescription" rows="3">Discover stories, insights, and inspiration in every post</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="blogAuthor">Author Name</label>
+                            <input type="text" id="blogAuthor" value="Admin">
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Save Settings</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Advanced Settings Tab -->
+            <div class="admin-tab-content" id="advancedTab">
+                <div class="advanced-settings">
+                    <!-- Social Media Links -->
+                    <div class="settings-section">
+                        <h3><i class="fas fa-share-alt"></i> Social Media Links</h3>
+                        <form class="social-form" id="socialForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="twitterUrl">Twitter</label>
+                                    <input type="url" id="twitterUrl" placeholder="https://twitter.com/yourusername">
+                                </div>
+                                <div class="form-group">
+                                    <label for="facebookUrl">Facebook</label>
+                                    <input type="url" id="facebookUrl" placeholder="https://facebook.com/yourpage">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="instagramUrl">Instagram</label>
+                                    <input type="url" id="instagramUrl" placeholder="https://instagram.com/yourusername">
+                                </div>
+                                <div class="form-group">
+                                    <label for="linkedinUrl">LinkedIn</label>
+                                    <input type="url" id="linkedinUrl" placeholder="https://linkedin.com/in/yourprofile">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="youtubeUrl">YouTube</label>
+                                    <input type="url" id="youtubeUrl" placeholder="https://youtube.com/yourchannel">
+                                </div>
+                                <div class="form-group">
+                                    <label for="githubUrl">GitHub</label>
+                                    <input type="url" id="githubUrl" placeholder="https://github.com/yourusername">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary">Save Social Links</button>
+                        </form>
+                    </div>
+
+                    <!-- Theme Customization -->
+                    <div class="settings-section">
+                        <h3><i class="fas fa-palette"></i> Theme Customization</h3>
+                        <form class="theme-form" id="themeForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="primaryColor">Primary Color</label>
+                                    <input type="color" id="primaryColor" value="#2563eb">
+                                </div>
+                                <div class="form-group">
+                                    <label for="accentColor">Accent Color</label>
+                                    <input type="color" id="accentColor" value="#f59e0b">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fontFamily">Font Family</label>
+                                    <select id="fontFamily">
+                                        <option value="Inter">Inter (Default)</option>
+                                        <option value="Roboto">Roboto</option>
+                                        <option value="Open Sans">Open Sans</option>
+                                        <option value="Lato">Lato</option>
+                                        <option value="Montserrat">Montserrat</option>
+                                        <option value="Poppins">Poppins</option>
+                                        <option value="Nunito">Nunito</option>
+                                        <option value="Playfair Display">Playfair Display</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fontSize">Base Font Size</label>
+                                    <select id="fontSize">
+                                        <option value="14px">Small (14px)</option>
+                                        <option value="16px" selected>Medium (16px)</option>
+                                        <option value="18px">Large (18px)</option>
+                                        <option value="20px">Extra Large (20px)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="themeStyle">Theme Style</label>
+                                <select id="themeStyle">
+                                    <option value="light">Light Theme</option>
+                                    <option value="dark">Dark Theme</option>
+                                    <option value="auto">Auto (System)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-primary">Apply Theme</button>
+                        </form>
+                    </div>
+
+                    <!-- Authentication Settings -->
+                    <div class="settings-section">
+                        <h3><i class="fas fa-shield-alt"></i> Authentication Settings</h3>
+                        <form class="auth-form" id="authForm">
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="enableLogin" checked>
+                                    <span class="checkmark"></span>
+                                    Enable Admin Login Protection
+                                </label>
+                                <small class="form-help">When enabled, admin panel requires password authentication</small>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="enableSignup">
+                                    <span class="checkmark"></span>
+                                    Enable User Registration
+                                </label>
+                                <small class="form-help">Allow visitors to create accounts (Future feature)</small>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="enableComments">
+                                    <span class="checkmark"></span>
+                                    Enable Comments on Posts
+                                </label>
+                                <small class="form-help">Allow visitors to comment on blog posts (Future feature)</small>
+                            </div>
+                            <button type="submit" class="btn-primary">Save Auth Settings</button>
+                        </form>
+                    </div>
+
+                    <!-- SEO & Meta Settings -->
+                    <div class="settings-section">
+                        <h3><i class="fas fa-search"></i> SEO & Meta Settings</h3>
+                        <form class="seo-form" id="seoForm">
+                            <div class="form-group">
+                                <label for="metaKeywords">Meta Keywords</label>
+                                <input type="text" id="metaKeywords" placeholder="blog, articles, stories, insights">
+                            </div>
+                            <div class="form-group">
+                                <label for="metaDescription">Meta Description</label>
+                                <textarea id="metaDescription" rows="3" placeholder="Brief description for search engines"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="googleAnalytics">Google Analytics ID</label>
+                                <input type="text" id="googleAnalytics" placeholder="G-XXXXXXXXXX">
+                            </div>
+                            <div class="form-group">
+                                <label for="facebookPixel">Facebook Pixel ID</label>
+                                <input type="text" id="facebookPixel" placeholder="123456789012345">
+                            </div>
+                            <button type="submit" class="btn-primary">Save SEO Settings</button>
+                        </form>
+                    </div>
+
+                    <!-- Advanced Options -->
+                    <div class="settings-section">
+                        <h3><i class="fas fa-cogs"></i> Advanced Options</h3>
+                        <form class="advanced-form" id="advancedForm">
+                            <div class="form-group">
+                                <label for="postsPerPage">Posts Per Page</label>
+                                <select id="postsPerPage">
+                                    <option value="6">6 Posts</option>
+                                    <option value="9" selected>9 Posts</option>
+                                    <option value="12">12 Posts</option>
+                                    <option value="15">15 Posts</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="enableRSS">
+                                    <span class="checkmark"></span>
+                                    Enable RSS Feed
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="enableSitemap">
+                                    <span class="checkmark"></span>
+                                    Generate Sitemap
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="enableSearch">
+                                    <span class="checkmark"></span>
+                                    Enable Search Functionality
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="enableNewsletter">
+                                    <span class="checkmark"></span>
+                                    Enable Newsletter Signup
+                                </label>
+                            </div>
+                            <button type="submit" class="btn-primary">Save Advanced Settings</button>
+                        </form>
+                    </div>
+
+                    <!-- Backup & Export -->
+                    <div class="settings-section">
+                        <h3><i class="fas fa-download"></i> Backup & Export</h3>
+                        <div class="backup-actions">
+                            <button type="button" class="btn-secondary" id="exportDataBtn">
+                                <i class="fas fa-download"></i> Export All Data
+                            </button>
+                            <button type="button" class="btn-secondary" id="importDataBtn">
+                                <i class="fas fa-upload"></i> Import Data
+                            </button>
+                            <input type="file" id="importFile" accept=".json" style="display: none;">
+                            <button type="button" class="btn-danger" id="resetDataBtn">
+                                <i class="fas fa-trash"></i> Reset All Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div class="modal" id="adminLoginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Admin Login</h2>
+                <button class="close-modal" id="closeLoginModalBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label for="adminPassword">Password</label>
+                        <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label" style="gap:0.5em; font-weight:400;">
+                            <input type="checkbox" id="rememberAdminLogin">
+                            <span class="checkmark"></span>
+                            Remember Me
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Login</button>
+                        <button type="button" class="btn-secondary" id="cancelLoginBtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Post Modal -->
+    <div class="modal" id="postModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <button class="close-modal" id="closeModalBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Post content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>The Begin Read</h3>
+                    <p>Sharing stories and insights that matter</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#" data-filter="tech">Tech</a></li>
+                        <li><a href="#" data-filter="lifestyle">Lifestyle</a></li>
+                        <li><a href="#" data-filter="travel">Travel</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 The Begin Read. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+df6a01b13cadc40a6e17
